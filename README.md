@@ -22,7 +22,7 @@ Usage Instructions
 
 4. Add an empty `div` element to the page that will contain the controls
 
-5. Run `$("#controlsDivId").soundCloudControls("playerId", ["cssColor"]);` when the page is finished loading.
+5. Run `$("#controlsDivId").soundCloudControls("playerId", "cssColor");` when the page is finished loading. (`cssColor` is optional)
 
 Example
 ======
