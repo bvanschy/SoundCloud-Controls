@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
-        <id>SoundCloudControls</id>
-        <version>1.0.0</version>
+        <id>SoundCloud-Controls</id>
+        <version>0.1.0</version>
         <title>SoundCloud Controls</title>
         <authors>Brian VanSchyndel</authors>
         <licenseUrl>https://github.com/bvanschy/SoundCloud-Controls/blob/master/LICENSE</licenseUrl>
@@ -11,9 +11,9 @@
         <description>A jQuery plugin for adding play, pause, skip, previous, and volume controls for the SoundCloud HTML5 embedded player to a webpage.</description>
         <summary>Controls for the SoundCloud HTML5 embedded player widget.</summary>
         <copyright>2015: Brian VanSchyndel</copyright>
-        <tags>SoundCloud, JavaScript, jQueryUI</tags>
+        <tags>SoundCloud, JavaScript, jQuery, jQueryUI</tags>
         <dependencies>
-            <dependency id="jQuery.UI.Combined" version="1.10.0" />
+            <dependency id="jQuery.UI.Combined" version="1.10.4" />
         </dependencies>
     </metadata>
     <files>
