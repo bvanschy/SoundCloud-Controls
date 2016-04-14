@@ -1,7 +1,9 @@
 ﻿(function () {
+    // SoundCloud widget user controls - jQuery UI plugin
+
     $.fn.soundCloudControls = function (iFrameElementId, color) {
         if (color === undefined) {
-            color = "#FF4800";
+            color = "#FF4800"; // default to typical SoundCloud orange
         }
 
         var player = SC.Widget(iFrameElementId);
@@ -13,6 +15,7 @@
         });
     };
 
+    /* SoundCloudControls wraps the SoundCloud widget and custom controls element */
     function SoundCloudControls(player, controlsElement) {
         this.player = player;
         this.controls = controlsElement;
@@ -21,6 +24,7 @@
     SoundCloudControls.prototype.init = function (color) {
         var soundCloudControls = this;
 
+        /* Create the custom controls elements */
         var playControls__controls = $("<div>").addClass("playControls__controls");
         this.prevControl = $("<button>").addClass("skipControl").addClass("playControls__icon").addClass("sc-ir").addClass("skipControl__previous").text("Skip to previous");
         this.playControl = $("<button>").addClass("playControl").addClass("playControls__icon").addClass("sc-ir").text("Play current");
@@ -34,6 +38,7 @@
         playControls__controls.append(this.slider);
         this.controls.append(playControls__controls);
 
+        /* Initialize volume level */
         this.unmutedVolume = 0.5;
         if (window.localStorage) {
             var savedVolume = window.localStorage.getItem("SCControlsVol");
@@ -43,6 +48,7 @@
         }
         this.setVolume(this.unmutedVolume);
 
+        /* Capture SoundCloud widget events for when the widget's built-in controls are used */
         this.player.bind(SC.Widget.Events.PLAY, function () {
             soundCloudControls.playControl.addClass("playing").text("Pause current");
         });
@@ -50,22 +56,22 @@
             soundCloudControls.playControl.removeClass("playing").text("Play current");
         });
 
+
+        /* Assign event listeners to custom control buttons */
         this.prevControl.click(function () {
             soundCloudControls.goBack();
         });
-
         this.playControl.click(function () {
             soundCloudControls.togglePlay();
         });
-
         this.nextControl.click(function () {
             soundCloudControls.goForward();
         });
-
         this.volumeControl.click(function () {
             soundCloudControls.toggleMute();
         });
 
+        /* Setup volume control slider */
         this.slider.slider({
             range: "min",
             value: this.unmutedVolume * 100,
@@ -84,8 +90,14 @@
             }
         });
     };
+
+
+    /* Perform actions on the SoundCloud widget */
+
     SoundCloudControls.prototype.setVolume = function (volume) {
         this.player.setVolume(volume);
+
+        /* Add attributes for CSS visualization */
         if (volume === 0) {
             this.volumeControl.addClass("muted");
         }
