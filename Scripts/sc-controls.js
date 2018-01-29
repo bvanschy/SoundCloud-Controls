@@ -39,11 +39,11 @@
         this.controls.append(playControls__controls);
 
         /* Initialize volume level */
-        this.unmutedVolume = 0.5;
+        this.unmutedVolume = 50;
         if (window.localStorage) {
-            var savedVolume = window.localStorage.getItem("SCControlsVol");
+            var savedVolume = window.localStorage.getItem("SCControlsVol2");
             if (savedVolume !== null) {
-                this.unmutedVolume = Number(savedVolume) / 100;
+                this.unmutedVolume = Number(savedVolume);
             }
         }
         this.setVolume(this.unmutedVolume);
@@ -74,18 +74,18 @@
         /* Setup volume control slider */
         this.slider.slider({
             range: "min",
-            value: this.unmutedVolume * 100,
+            value: this.unmutedVolume,
             min: 0,
             max: 100,
             create: function (event, ui) {
                 $(this).find(".ui-slider-range").css("background", color);
             },
             slide: function (event, ui) {
-                soundCloudControls.setVolume(ui.value / 100);
+                soundCloudControls.setVolume(ui.value);
             },
             change: function (event, ui) {
                 if (window.localStorage) {
-                    window.localStorage.setItem("SCControlsVol", ui.value);
+                    window.localStorage.setItem("SCControlsVol2", ui.value);
                 }
             }
         });
@@ -126,7 +126,7 @@
         this.player.getVolume(function (currentVolume) {
             if (currentVolume === 0) {
                 soundCloudControls.setVolume(soundCloudControls.unmutedVolume);
-                soundCloudControls.slider.slider("value", soundCloudControls.unmutedVolume * 100);
+                soundCloudControls.slider.slider("value", soundCloudControls.unmutedVolume);
             }
             else {
                 soundCloudControls.unmutedVolume = currentVolume;
